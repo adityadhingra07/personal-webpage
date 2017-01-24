@@ -1,10 +1,31 @@
 /* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
+
+ .top-panel {
+   background-image: url(src = "bgpanel.png");
+ }
+
+ .board {
+     text-align: center;
+     width: 100%;
+     margin: 50px auto 0 auto;
+     padding: 20px;
+     background-color: transparent;
+ }
+
+ .board span {
+ 	position: relative;
+ 	display: -webkit-flex;
+ 	display: -ms-flexbox;
+ 	display: flex;
+ 	-webkit-justify-content: center;
+ 	-ms-flex-pack: center;
+ 	justify-content: center;
+ 	-webkit-align-items: center;
+ 	-ms-flex-align: center;
+ 	align-items: center;
+ 	max-width: 100%;
+ 	pointer-events: none;
+ }
 
 .icon-block {
   padding: 0 15px;
@@ -63,4 +84,8 @@
     0% { opacity:1; }
     50% { opacity:0; }
     100% { opacity:1; }
+}
+
+#email-icon{
+  font-size: 36px;
 }

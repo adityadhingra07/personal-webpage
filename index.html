@@ -7,18 +7,25 @@
 
   <!-- CSS  -->
   <link href='https://fonts.googleapis.com/css?family=Bungee+Outline' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" type='text/css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/unslider.css" rel="stylesheet">
-  <link href="css/unslider-dots.css" rel="stylesheet">
+
+  <!-- VEX Dialogues -->
+  <script src="js/vex.combined.min.js"></script>
+  <script>vex.defaultOptions.className = 'vex-theme-wireframe'</script>
+  <link rel="stylesheet" href="css/vex.css" />
+  <link rel="stylesheet" href="css/vex-theme-wireframe.css" />
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/typed.js"></script>
-  <script src="js/unslider-min.js"></script>
+  <script src="js/segment.min.js"></script>
+	<script src="js/d3-ease.v0.6.js"></script>
+	<script src="js/letters.js"></script>
 
   <script>
   $(function(){
@@ -31,40 +38,90 @@
 </script>
 
 <script>
-    jQuery(document).ready(function($) {
-      $('.my-slider').unslider({
-        autoplay: true,
-        delay: 5000,
-        infinite: true
-      });
-    });
+  $(function() {
+  var effect = document.querySelector('#aditya');
+
+  var options = {
+    size : 330,
+    weight : 12,
+    color: '#151517',
+    duration: 0.4,
+    fade: 0,
+    delay: 0.2,
+    easing: d3_ease.easePolyOut.ease
+  };
+
+  var myEffect = new Letters(effect, options);
+  myEffect.show(options);
+});
+</script>
+
+<script>
+
+  function chat() {
+
+    vex.dialog.open({
+    message: 'Send me a message!',
+    input: [
+        '<input name="email" type="email" placeholder="Your Email" required />',
+        '<input name="name" type="text" placeholder="Your Name" required />',
+        '<textarea name="message" placeholder="Your message goes here ..."></textarea>'
+    ].join(''),
+    buttons: [
+        $.extend({}, vex.dialog.buttons.YES, { text: 'Send' }),
+        $.extend({}, vex.dialog.buttons.NO, { text: 'Cancel' })
+    ],
+    callback: function (data) {
+        if (!data) {
+            console.log('Cancelled')
+        } else {
+            console.log('Username', data.username, 'Password', data.password)
+        }
+    }
+  });
+
+  }
+
 </script>
 
 </head>
 <body>
+<div class="top-panel">
 <div class="navbar-fixed">
-  <nav class="z-depth-0 white" role="navigation" id="nav_bar">
+  <nav class="z-depth-0 black" role="navigation" id="nav_bar">
     <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo green-text">Aditya Dhingra</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="" class="green-text">About Me</a></li>
         <li><a href="" class="green-text">Projects</a></li>
         <li><a href="" class="green-text">Resume</a></li>
-        <li><a href="" class="green-text">Let's Talk</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
         <li><a href="">About Me</a></li>
         <li><a href="">Projects</a></li>
         <li><a href="">Resume</a></li>
-        <li><a href="">Let's Talk</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="teal-text text-accent-3 material-icons">menu</i></a>
     </div>
   </nav>
   </div>
+
+  <!-- CHAT BUTTON -->
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large blue large material-icons" onclick="chat()">
+      <i class="large material-icons">question_answer</i>
+    </a>
+  </div>
+
+  <!-- ANIMATED TEXT -->
   <div class="section no-pad-bot" id="index-banner">
+
     <div class="container">
       <br><br>
+      <div class="board">
+        <span id="aditya">aditya</span>
+      </div>
+      <br>
       <h1 class="header center blue-text">I <span class="element"></span></h1>
       <div class="row center">
         <h5 class="header col s12 light">Full-stack developer.</h5>
@@ -108,11 +165,11 @@
           <h1 class="center flow-text" id="projects-text">Projects</h1>
         </div>
       </div>
-     
+
 <!--         <div class="row">
           <div class="my-slider">
             <ul>
-              
+
               <li>
                   <div class="center card small blue-grey darken-1">
                       <div class="card-content white-text">
@@ -174,7 +231,7 @@
                   </div>
                 </div>
               </li>
-            
+
             </ul>
           </div>
         </div> -->
@@ -230,15 +287,14 @@
           </div>
 
         </div>
-    
+
      </div>
 
   <footer class="page-footer green lighten-1">
     <div class="container">
       <div class="row">
-        <div class="col l6 s12">
+        <!-- <div class="col l6 s12">
           <h5 class="white-text"><i class="material-icons">local_cafe</i> Let's Talk</h5>
-          <!-- <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p> -->
        <div class="card-panel green lighten-2 white-text" id="contact_form">
        <form>
        <div class="input-field row">
@@ -258,25 +314,12 @@
         </div>
       </form>
       </div>
-
-
-        </div>
-<!--         <div class="col l3 s3">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
         </div> -->
-        <div class="col l6 s12 right-align">
-          <h5 class="white-text">Let's Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!"><img src="images/github.png"></a></li>
-            <li><a class="white-text" href="#!"><img src="images/linkedin.png"></a></li>
-            <li><a class="white-text" href="#!"><img src="images/twitter.png"></a></li>
-          </ul>
+        <div class="col l12 s12 center-align">
+            <a class="white-text" href="#!"><img src="images/github.png"></a>&nbsp&nbsp
+            <a class="white-text" href="#!"><img src="images/linkedin.png"></a>&nbsp&nbsp
+            <a class="white-text" href="#!"><img src="images/twitter.png"></a>&nbsp&nbsp
+            <a class="white-text material-icons" href="#!" id="email-icon">email</a>
         </div>
       </div>
     </div>
@@ -288,7 +331,7 @@
   </footer>
 
 
-  
+
 
   </body>
 </html>
